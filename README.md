@@ -1,5 +1,5 @@
-# AutoViDev
-Welcome! This is the project [AutoViDev](https://github.com/Xinghua-TAO/AutoVeDv.git), and we are waiting for you!
+# AutoViDevSpeech
+Welcome! This is the project [AutoViDevSpeech](https://github.com/Xinghua-TAO/AutoVeDv.git), and we are waiting for you!
 
 ## Introduction
 Interdisciplinary exchange of ideas and tools can accelerate scientific progress.
