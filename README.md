@@ -14,13 +14,5 @@ manual actions, and interactions with objects.
 
 Now we added exicting voice recognition function in it! Come and join us!
 
-## Repository Address
-* HTTP: 'https://github.com/Xinghua-TAO/AutoVeDv.git'.
-* Git: 'git://github.com/Xinghua-TAO/AutoVeDv.git'.
-* SSH: 'git@github.com:Xinghua-TAO/AutoVeDv.git'.
 
-## Clone Repository
 
-Example:
-
-    $ git clone git://github.com/Xinghua-TAO/AutoVeDv.git
