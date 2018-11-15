@@ -5,7 +5,7 @@ import subprocess as sp
 def convert_video(video_input, video_output):
     command = [FFMPEG_BIN,
                "-i", video_input,  # input path
-               "-f", "mp3",  # format
+               "-f", "wav",  # format
                "-vn",  # disable video recording
                "-ar", "44100",  # sets the sampling rate for audio streams
                "-ac", "2",  # set the number of audio channels
@@ -14,4 +14,4 @@ def convert_video(video_input, video_output):
     sp.Popen(command)
 
 # test new function
-convert_video("C:/Users/taotao/Desktop/research/test.mp4", "C:/Users/taotao/Desktop/research/test.mp3")
+convert_video("C:/Users/taotao/Desktop/research/test.mp4", "C:/Users/taotao/Desktop/research/test.wav")
