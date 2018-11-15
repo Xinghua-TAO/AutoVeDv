@@ -2,17 +2,7 @@
 Welcome! This is the project [AutoViDevSpeech](https://github.com/Xinghua-TAO/AutoVeDv.git), and we are waiting for you!
 
 ## Introduction
-Interdisciplinary exchange of ideas and tools can accelerate scientific progress.
-However, relatively little attention has been paid to how artificial intelligence
-and computer vision can facilitate research in social science. Here, we 
-present AutoViDev—an automatic video-analysis tool that uses machine learning and 
-computer vision to support video-based developmental research. AutoViDev identifies 
-full body position estimations in real-time video streams using convolutional pose 
-machine-learning algorithms. AutoViDev provides valuable information about a variety 
-of behaviors, including gaze direction, facial expressions, posture, locomotion, 
-manual actions, and interactions with objects.
-
-Now we added exicting voice recognition function in it! Come and join us!
+Many artificial intelligence (AI) researchers draw important insights from developmental science. Conversely, relatively few developmental researchers use AI and speech recognition tools to facilitate the study of behavioral development. Most developmental researchers lack expertise in AI and speech recognition, so the enormous potential of AI and speech recognition to speed progress in video-based developmental research remains untapped. The current project this notable gap by using state-of-the-art algorithm to transcribe videos of developmental research automatically. This tool is part of AutoViDev—an automatic video-analysis tool that uses machine learning to support video-based developmental research.
 
 
 
