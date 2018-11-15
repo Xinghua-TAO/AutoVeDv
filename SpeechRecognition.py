@@ -1,7 +1,7 @@
 # use the package speech_recognition
 import speech_recognition as sr
 
-# define the function and the parameter audio_input means the path of the audio
+# define the function and the parameter audio_input means the path of the audio and the txt_output means the path and the name of your output file
 def recognize_speech(audio_input,txt_output):
     r = sr.Recognizer()
     beginner = sr.AudioFile(audio_input)
@@ -19,4 +19,5 @@ def recognize_speech(audio_input,txt_output):
             f.write(result)
         print(result)
 
+# test this function
 recognize_speech("C:/Users/taotao/Desktop/research/OSR_us_000_0010_8k.wav","C:/Users/taotao/Desktop/research/OSR_us_000_0010_8k.txt")
