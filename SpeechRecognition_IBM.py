@@ -16,22 +16,22 @@ def recognize_speech_ibm(audio_input,txt_output):
         # use Microsoft Bing Voice Recognition
         print("IBM Cloud Recognition results:")
         txt = r.recognize_ibm(audio, apikey=IBM_KEY)
+        print(txt)
 
 
 
          # store the result in a txt file
-        if str is bytes:
-            result = u"{}".format(txt).encode("utf-8")
-        else:
-            result = "{}".format(txt)
+        #if str is bytes:
+            #result = u"{}".format(txt).encode("utf-8")
+       # else:
+           # result = "{}".format(txt)
 
-        with open(txt_output, "a") as f:
-            f.write(result)
-            print(result)
+       # with open(txt_output, "a") as f:
+            #f.write(result)
 
     except sr.UnknownValueError:
         print("IBM Cloud Recognition could not understand audio")
     except sr.RequestError as error:
         print("Could not request results from IBM Cloud Recognition service; {0}".format(error))
 # test this function
-recognize_speech_ibm("C:/Users/taotao/Desktop/research/test/female.wav", "C:/Users/taotao/Desktop/research/test/test.txt")
+recognize_speech_ibm("C:/Users/taotao/Desktop/research/test/step1.wav", "C:/Users/taotao/Desktop/research/test/step1(ibm).txt")
