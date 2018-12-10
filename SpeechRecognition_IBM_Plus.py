@@ -1,27 +1,1 @@
-from watson_developer_cloud import SpeechToTextV1
-import json
-
-
-def recognize_speech_ibm_plus(yourkey, url_address, audio_input):
-    # yourkey = '4b9ZXrpMUL6jo5Q9lw1htmo_Y4xdiku9tydRKVY8Q9Pv'
-    # url_adress = 'https://stream.watsonplatform.net/speech-to-text/api'
-    speech_to_text = SpeechToTextV1(
-        iam_apikey=yourkey,
-        url=url_address
-    )
-
-    # files = 'C:/Users/taotao/Desktop/research/test/test.wav'
-    files = audio_input
-    with open(files, 'rb') as audio_file:
-        speech_recognition_results = speech_to_text.recognize(
-            audio=audio_file,
-            model="en-US_BroadbandModel",
-            content_type='audio/wav',
-            timestamps=True,
-        ).get_result()
-    print(json.dumps(speech_recognition_results, indent=2))
-
-
-recognize_speech_ibm_plus('4b9ZXrpMUL6jo5Q9lw1htmo_Y4xdiku9tydRKVY8Q9Pv',
-                          'https://stream.watsonplatform.net/speech-to-text/api', "C:/Users/taotao/Desktop/research/test/step1.wav")
-
+from watson_developer_cloud import SpeechToTextV1import jsonimport pandas as pdfrom pandas import DataFramedef recognize_speech_ibm_plus(yourkey, url_address, audio_input,csv_output):    # yourkey = '4b9ZXrpMUL6jo5Q9lw1htmo_Y4xdiku9tydRKVY8Q9Pv'    # url_adress = 'https://stream.watsonplatform.net/speech-to-text/api'    speech_to_text = SpeechToTextV1(        iam_apikey=yourkey,        url=url_address    )    # files = 'C:/Users/taotao/Desktop/research/test/test.wav'    files = audio_input    with open(files, 'rb') as audio_file:        speech_recognition_results = speech_to_text.recognize(            audio=audio_file,            model="en-US_NarrowbandModel",            content_type='audio/wav',            timestamps=True,        ).get_result()    with open("C:/Users/taotao/Desktop/research/test/data.json", "w") as write_file:        json.dump(speech_recognition_results, write_file)    data = r"C:/Users/taotao/Desktop/research/test/data.json"    print(data)    # Reads and converts json to dict.    def js_r(data):        with open(data, encoding='utf-8') as f_in:            return (json.load(f_in))    my_dic_data = js_r(data)    # print(type(my_dic_data))    print('############################################################')    print(audio_input)    dict_step1 = my_dic_data['results']    list_headline = ['word', 'onset', 'offset']    words = []    for n in dict_step1:        sentence = n['alternatives'][0]['timestamps']        words = words + sentence        # for i in sentence:        #     words = i        #     # print(words)    table = pd.DataFrame(columns=list_headline, data=words)    print(table)    table.to_csv(csv_output)recognize_speech_ibm_plus('4b9ZXrpMUL6jo5Q9lw1htmo_Y4xdiku9tydRKVY8Q9Pv',                          'https://stream.watsonplatform.net/speech-to-text/api', "C:/Users/taotao/Desktop/research/test/speech.wav","C:/Users/taotao/Desktop/research/test/speech.csv")
