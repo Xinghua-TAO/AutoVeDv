@@ -34,4 +34,4 @@ def transcribe_gcs_with_word_time_offsets(speech_file):
                 end_time.seconds * 1000 + end_time.nanos * 1e-6))
 
 
-transcribe_gcs_with_word_time_offsets("C:/Users/taotao/Desktop/research/test/HHcut.wav")
+# transcribe_gcs_with_word_time_offsets("C:/Users/taotao/Desktop/research/test/HHcut.wav")
