@@ -23,15 +23,20 @@ def transcribe_gcs_with_word_time_offsets(speech_file):
 
     for result in result.results:
         alternative = result.alternatives[ 0 ]
+        # words = []
 
         for word_info in alternative.words:
             word = word_info.word
             start_time = word_info.start_time
             end_time = word_info.end_time
-            print('{}, {}, {}'.format(
+            trans = '{}, {}, {}'.format(
                 word,
                 start_time.seconds * 1000 + start_time.nanos * 1e-6,
-                end_time.seconds * 1000 + end_time.nanos * 1e-6))
+                end_time.seconds * 1000 + end_time.nanos * 1e-6)
+            print(trans)
 
+            # trans_list = trans.split(",")
+            # words = words + trans_list
+        # print(words)
 
 # transcribe_gcs_with_word_time_offsets("C:/Users/taotao/Desktop/research/test/HHcut.wav")
