@@ -47,6 +47,10 @@ if __name__ == '__main__':
     import sys
     if len(sys.argv) > 1:
         # TODO: add input validation
-        transcribe_gcs_with_word_time_offsets(sys.argv[1])
+        # Convert video to audio
+        video_path = sys.argv[1]
+        from Set_wav import audio_path
+        wav_path = audio_path(video_path)
+        transcribe_gcs_with_word_time_offsets(wav_path)
     else:
-        print >> sys.stderr, "Must specify file to transcribe!"
+        sys.stderr.write("Must specify file to transcribe!")
