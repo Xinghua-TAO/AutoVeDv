@@ -7,13 +7,12 @@ Many artificial intelligence (AI) researchers draw important insights from devel
 ## Prerequisite
 1. Python 3.6
 1. [ffmeg package](https://pypi.org/project/ffmpeg/)
-1. [SpeechRecognition Package](https://pypi.org/project/SpeechRecognition/)
+1. Google client library: google-cloud-speech
+1. numpy package(only if you need a csv file as your output)
 1. Any API here:
-    - CMU
-    - Google Speech Recognition
+    - Cloud Speech-to-Text(https://cloud.google.com/speech-to-text/)
     - Google Cloud Speech API
     - Wit.ai
-    - Microsoft Bing Voice Recognition
     - Houndify API
     - IBM Speech to Text
 
