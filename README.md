@@ -11,9 +11,10 @@ Many artificial intelligence (AI) researchers draw important insights from devel
 1. numpy package(only if you need a csv file as your output)
 1. Any API here:
     - [Cloud Speech-to-Text](https://cloud.google.com/speech-to-text/)
+    - IBM Speech to Text
     - Google Cloud Speech API
     - Wit.ai
     - Houndify API
-    - IBM Speech to Text
+    
 
 
