@@ -10,7 +10,7 @@ Many artificial intelligence (AI) researchers draw important insights from devel
 1. Google client library: google-cloud-speech
 1. numpy package(only if you need a csv file as your output)
 1. Any API here:
-    - Cloud Speech-to-Text(https://cloud.google.com/speech-to-text/)
+    - [Cloud Speech-to-Text](https://cloud.google.com/speech-to-text/)
     - Google Cloud Speech API
     - Wit.ai
     - Houndify API
