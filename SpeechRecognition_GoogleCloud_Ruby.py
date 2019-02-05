@@ -40,3 +40,13 @@ def transcribe_gcs_with_word_time_offsets(speech_file):
         # print(words)
 
 # transcribe_gcs_with_word_time_offsets("C:/Users/taotao/Desktop/research/test/HHcut.wav")
+
+if __name__ == '__main__':
+    """If run as a script, transcribe the file specified by first command line argument"""
+
+    import sys
+    if len(sys.argv) > 1:
+        # TODO: add input validation
+        transcribe_gcs_with_word_time_offsets(sys.argv[1])
+    else:
+        print >> sys.stderr, "Must specify file to transcribe!"

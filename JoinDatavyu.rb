@@ -1,33 +1,12 @@
 
-                                                                                                    # Import data from plaintext file.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# Import data from plaintext file.
 ## Params
-input_file = :prompt#'~/Desktop/data.csv'
+input_file = :stream #:prompt #'~/Desktop/data.csv'
 col_sep = ','
 csv_opts = {
   :col_sep => col_sep
 }
-start_row = 2 # Row to start reading data from; first line is row 1 (use 2 to skip reading header if present)
+start_row = 1 # Row to start reading data from; first line is row 1 (use 2 to skip reading header if present)
 
 # Denote how columns from the input file will be represented in the datavyu spreadsheet
 # This is a nested associative array.
@@ -35,21 +14,25 @@ start_row = 2 # Row to start reading data from; first line is row 1 (use 2 to sk
 # The inner keys are names of codes, and the values for the inner keys are the indices of input
 # columns containing the values for the code. The first column of the input is column 1.
 code_map = {
-  'transcript' => { # id data starts at column 2
-    'onset' => 2,
-    'offset' => 3,
-    'word' => 4
+  'transcript' => {
+    'onset' => 1,
+    'offset' => 2,
+    'word' => 3
   }
 }
+# Parameters for calling python transcription library to do on-line transcription.
+PY_SCRIPT_PATH = '~/SpeechRecognition_GoogleCloud_Ruby.py' #'~/GetTranscriptUser.py'
 
 ## Body
 require 'Datavyu_API.rb'
 require 'csv'
-java_import javax::swing::JFileChooser
-java_import javax::swing::filechooser::FileNameExtensionFilter
+
 begin
-  # If input_file is :prompt, open up a file chooser window to let user select input file.
   if(input_file == :prompt)
+    # If input_file is :prompt, open up a file chooser window to let user select input file.
+    java_import javax::swing::JFileChooser
+    java_import javax::swing::filechooser::FileNameExtensionFilter
+
     txtFilter = FileNameExtensionFilter.new('Text file','txt')
     csvFilter = FileNameExtensionFilter.new('CSV file', 'csv')
     jfc = JFileChooser.new()
@@ -65,13 +48,41 @@ begin
       puts "Invalid selection. Aborting."
       return
     end
-
     scriptFile = jfc.getSelectedFile()
     fn = scriptFile.getAbsolutePath()
     infile = File.open(fn, 'r')
+  elsif(input_file == :stream)
+    # For :stream input, call the python library and pass it the first video in the Datavyu Controller.
+    # Show a confirmation dialog box to the user before proceeding.
+    java_import javax::swing::JOptionPane
+
+    videos = Datavyu.getVideoController().getStreamViewers()
+    if videos.empty?
+      puts "There are no videos in this spreadsheet! Please add a video and run again."
+      exit 1
+    else
+      video_path = videos.toArray().first.getSourceFile().getPath()
+    end
+
+    msg = sprintf("Confirm transcription of following file: %s\n", video_path)
+    jop = JOptionPane.showConfirmDialog(nil, msg, "Proceed?", JOptionPane::YES_NO_OPTION)
+    
+    if jop == 0
+      data = `python #{PY_SCRIPT_PATH} #{video_path}`.split("\n")
+      unless $?.exitstatus == 0
+        puts "Transcription unsuccessful. Exit status: #{$?}"
+        exit $?.exitstatus
+      end
+      p data
+    else
+      puts "User cancelled."
+      exit 0
+    end
+
   else
     # Open input file for read
     infile = File.open(File.expand_path(input_file), 'r')
+    data = infile.readlines()
   end
 
   # Set up spreadsheet with columns from code_map
@@ -86,9 +97,9 @@ begin
   code_map.keys.each{ |x| prev_data[x] = nil }
 
   # Read lines from the input file and add data
-  infile.readlines.each_with_index do |line, idx|
+  data.each_with_index do |line, idx|
     next unless idx >= (start_row - 1)
-
+    puts line
     tokens = CSV.parse_line(line, csv_opts)
 
     # Group data by column
