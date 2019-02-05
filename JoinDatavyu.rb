@@ -15,13 +15,13 @@ start_row = 1 # Row to start reading data from; first line is row 1 (use 2 to sk
 # columns containing the values for the code. The first column of the input is column 1.
 code_map = {
   'transcript' => {
-    'onset' => 1,
-    'offset' => 2,
-    'word' => 3
+    'onset' => 2,
+    'offset' => 3,
+    'word' => 1
   }
 }
 # Parameters for calling python transcription library to do on-line transcription.
-PY_SCRIPT_PATH = '~/SpeechRecognition_GoogleCloud_Ruby.py' #'~/GetTranscriptUser.py'
+py_script_path = '~/PycharmProjects/AutoViDevSpeech_Xinghua/SpeechRecognition_GoogleCloud_Ruby.py' #'~/GetTranscriptUser.py'
 
 ## Body
 require 'Datavyu_API.rb'
@@ -68,12 +68,17 @@ begin
     jop = JOptionPane.showConfirmDialog(nil, msg, "Proceed?", JOptionPane::YES_NO_OPTION)
     
     if jop == 0
-      data = `python #{PY_SCRIPT_PATH} #{video_path}`.split("\n")
-      unless $?.exitstatus == 0
+      require 'open3'
+      script_path = File.expand_path(py_script_path)
+      puts "Running script: #{script_path}"
+      data = `python #{script_path} #{video_path}`.split("\n")
+      status = $?
+      unless status.success?
         puts "Transcription unsuccessful. Exit status: #{$?}"
-        exit $?.exitstatus
+        puts "Returned:"
+        p data
+        exit status.exitstatus
       end
-      p data
     else
       puts "User cancelled."
       exit 0
